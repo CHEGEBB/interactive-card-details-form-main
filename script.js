@@ -368,14 +368,14 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.borderColor = 'hsl(249, 99%, 64%)';
             this.style.borderWidth = '2px';
             this.style.borderImage = 'linear-gradient(to right, hsl(249, 99%, 64%), hsl(278, 94%, 30%)) 1';
-            this.style.borderRadius = '15px'; // Set border radius
+            this.style.borderRadius = '15px';
         });
 
         // Add blur event listener
         input.addEventListener('blur', function() {
             // Remove border styles when the input field loses focus
-            this.style.borderColor = ''; // Reset border color
-            this.style.borderWidth = ''; // Reset border width
+            this.style.borderColor = '';
+            this.style.borderWidth = '';
             this.style.borderImage = '';
             this.style.borderRadius = '';
         });
