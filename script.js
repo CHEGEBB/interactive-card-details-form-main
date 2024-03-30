@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
             cardNumberInput.style.borderColor = 'hsl(0, 100%, 85%)';
             cardNumberInput.style.color = 'black';
             cardNumberInput.style.borderRadius = '5px';
+            cardNumberInput.style.borderImage = 'none';
 
             // Remove error message if it exists
             if (errorLabel) {
@@ -122,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 errorLabel.id = 'account-error';
                 errorLabel.style.color = 'hsl(0, 100%, 70%)';
                 errorLabel.textContent = errorMessage;
+                cardNumberInput.parentNode.insertBefore(errorLabel, cardNumberInput.nextSibling);
 
             }
         }
@@ -165,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 expirationError.id = 'expiration-error';
                 expirationError.style.color = 'red';
                 expirationError.textContent = errorMessage;
-                cardNumberInput.parentNode.insertBefore(errorLabel, expiration.nextSibling);
+                mmInput.parentNode.insertBefore(errorLabel, expiration.nextSibling);
             }
         }
 
@@ -354,6 +356,31 @@ document.addEventListener('DOMContentLoaded', function() {
         card1.style.display = 'flex';
         card2.style.display = 'none';
     });
+
+    // Get all input fields and button
+    const inputFields = document.querySelectorAll('#card-form input, #card-form button');
+
+    // Add focus and blur event listeners to each input field and button
+    inputFields.forEach(input => {
+        // Add focus event listener
+        input.addEventListener('focus', function() {
+            // Apply specified border styles when the input field gains focus
+            this.style.borderColor = 'hsl(249, 99%, 64%)';
+            this.style.borderWidth = '2px';
+            this.style.borderImage = 'linear-gradient(to right, hsl(249, 99%, 64%), hsl(278, 94%, 30%)) 1';
+            this.style.borderRadius = '15px'; // Set border radius
+        });
+
+        // Add blur event listener
+        input.addEventListener('blur', function() {
+            // Remove border styles when the input field loses focus
+            this.style.borderColor = ''; // Reset border color
+            this.style.borderWidth = ''; // Reset border width
+            this.style.borderImage = '';
+            this.style.borderRadius = '';
+        });
+    });
+
 
 
 
