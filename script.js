@@ -13,10 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
     container.style.margin = 'auto';
     container.style.gap = '20px';
 
-    // Hide element with id 'hide'
-    let hide = document.getElementById('hide');
-    hide.style.display = 'none';
-
     // Set left side styles
     let left = document.getElementById('left');
     left.style.width = '30%';
@@ -67,15 +63,15 @@ document.addEventListener('DOMContentLoaded', function() {
     form.style.marginTop = '100px';
 
     // Set input styles
-    let cardNumberInput = document.querySelector('#card-form input[placeholder="e.g. 1234 5678 9123 000"]');
-    let cardholderNameInput = document.querySelector('#card-form input[placeholder="e.g. Jane Appleseed"]');
-    let mmInput = document.querySelectorAll('#card-form input[placeholder="MM"]')[0];
-    let yyInput = document.querySelectorAll('#card-form input[placeholder="YY"]')[0];
-    let cvcInput = document.querySelector('#card-form input[placeholder="e.g. 123"]');
-    let cardholderNameLabel = document.querySelector('label[for="Cardholder Name"]');
-    let cardNumberLabel = document.querySelector('label[for="Card Number"]');
-    let expirationDateLabel = document.querySelector('label[for="Expiration Date"]');
-    let cvcLabel = document.querySelector('label[for="CVC"]');
+    const cardNumberInput = document.querySelector('#card-form input[placeholder="e.g. 1234 5678 9123 000"]');
+    const cardholderNameInput = document.querySelector('#card-form input[placeholder="e.g. Jane Appleseed"]');
+    const mmInput = document.querySelectorAll('#card-form input[placeholder="MM"]')[0];
+    const yyInput = document.querySelectorAll('#card-form input[placeholder="YY"]')[0];
+    const cvcInput = document.querySelector('#card-form input[placeholder="e.g. 123"]');
+    const cardholderNameLabel = document.querySelector('label[for="Cardholder Name"]');
+    const cardNumberLabel = document.querySelector('label[for="Card Number"]');
+    const expirationDateLabel = document.querySelector('label[for="Expiration Date"]');
+    const cvcLabel = document.querySelector('label[for="CVC"]');
 
     // Set label styles
     cardholderNameLabel.style.color = 'hsl(278, 68%, 11%)';
@@ -191,15 +187,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const card1 = document.getElementById('card-form');
     const card2 = document.getElementById('hide');
     const submitButton = document.querySelector('.right button[type="submit"]');
+    //set styles for card2
+    card2.style.marginRight = '220px';
+    card2.style.marginTop = '190px'
 
     // Hide the first card and show the second card when confirm button is clicked
     submitButton.addEventListener('click', (e) => {
         e.preventDefault();
-        card1.classList.add('hide');
+        card1.style.display = 'none';
+        card2.style.display = 'block';
         card2.classList.remove('hide');
     });
 
-    const continueButton = document.getElementById('continue');
+    const continueButton = document.querySelector('.card2 button[type="button"]');
     continueButton.style.width = '300px';
     continueButton.style.height = '45px';
     continueButton.style.marginTop = '20px';
@@ -211,7 +211,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     continueButton.addEventListener('click', (e) => {
         e.preventDefault();
-        card1.classList.remove('hide');
-        card2.classList.add('hide');
+        card1.style.display = 'flex';
+        card2.style.display = 'none';
     });
+
+    //listening for the input event on the card number input field and updating the card 
+    cardNumberInput.addEventListener('input', (e) => {
+        let value = e.target.value;
+        let cardNumber = document.getElementById('account-number');
+        cardNumber.textContent = value;
+    });
+
 });
