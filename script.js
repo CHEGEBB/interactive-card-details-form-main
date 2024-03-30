@@ -73,6 +73,58 @@ document.addEventListener('DOMContentLoaded', function() {
     const expirationDateLabel = document.querySelector('label[for="Expiration Date"]');
     const cvcLabel = document.querySelector('label[for="CVC"]');
 
+    cardNumberInput.addEventListener('input', (e) => {
+        let value = e.target.value;
+        let cardNumber = document.getElementById('account-number');
+
+        if (value.length <= 16) {
+            cardNumber.textContent = value;
+        } else {
+            this.value = value.slice(0, 16);
+            cardNumber.textContent = this.value;
+        }
+    });
+
+    cardholderNameInput.addEventListener('input', (e) => {
+        let value = e.target.value;
+        let cardholder = document.getElementById('user');
+
+        if (value.length <= 17) {
+            cardholder.textContent = value;
+        } else {
+            this.value = value.slice(0, 16);
+            cardholder.textContent = this.value;
+        }
+    });
+
+    mmInput.addEventListener('input', updateExpirationDate);
+    yyInput.addEventListener('input', updateExpirationDate);
+
+
+    function updateExpirationDate() {
+        const mmValue = mmInput.value;
+        const yyValue = yyInput.value;
+        const expirationDate = document.getElementById('expiration-date');
+        if (mmValue <= 31) {
+
+            if (mmValue && yyValue) {
+                expirationDate.textContent = `${mmValue.padStart(2, '0')}/${yyValue.padStart(2, '0')}`;
+            }
+
+        }
+    }
+    cvcInput.addEventListener('input', (e) => {
+        let value = e.target.value;
+        let cvcValue = document.getElementById('cvc-value');
+        if (value <= 3) {
+            cvcValue.textContent = value;
+        } else {
+            this.value = value.slice(0, 3);
+            cvcValue.textContent = this.value;
+        }
+    });
+
+
     // Set label styles
     cardholderNameLabel.style.color = 'hsl(278, 68%, 11%)';
     cardholderNameLabel.style.fontSize = '15px';
@@ -215,11 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
         card2.style.display = 'none';
     });
 
-    //listening for the input event on the card number input field and updating the card 
-    cardNumberInput.addEventListener('input', (e) => {
-        let value = e.target.value;
-        let cardNumber = document.getElementById('account-number');
-        cardNumber.textContent = value;
-    });
+
+
 
 });
