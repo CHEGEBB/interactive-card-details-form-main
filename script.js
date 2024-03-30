@@ -76,13 +76,57 @@ document.addEventListener('DOMContentLoaded', function() {
     cardNumberInput.addEventListener('input', (e) => {
         let value = e.target.value;
         let cardNumber = document.getElementById('account-number');
+        let digitPattern = /^\d+$/;
+        let errorLabel = document.getElementById('account-error');
 
-        if (value.length <= 16) {
-            cardNumber.textContent = value;
+        if (digitPattern.test(value) || value === '') {
+            let formattedValue = value.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, '$1 ');
+
+            if (formattedValue.length <= 19) {
+                cardNumberInput.style.backgroundColor = 'white';
+                cardNumberInput.style.borderColor = 'black';
+                cardNumberInput.style.color = 'black';
+                cardNumberInput.style.borderRadius = '5px';
+
+                // Remove error message if it exists
+                if (errorLabel) {
+                    errorLabel.textContent = '';
+                }
+
+                cardNumber.textContent = formattedValue;
+            } else {
+                // Error handling for exceeding 16 characters
+                handleInputError('Card number must not exceed 16 characters');
+                cardNumber.textContent = formattedValue.slice(0, 19);
+            }
         } else {
-            this.value = value.slice(0, 16);
-            cardNumber.textContent = this.value;
+            // Error handling for non-numeric input
+            handleInputError('Wrong format, numbers only');
+            cardNumber.textContent = '';
         }
+
+        // Function to handle input errors
+        function handleInputError(errorMessage) {
+            cardNumberInput.style.backgroundColor = 'white';
+            cardNumberInput.style.borderColor = 'hsl(0, 100%, 85%)';
+            cardNumberInput.style.color = 'black';
+            cardNumberInput.style.borderRadius = '5px';
+
+            // Remove error message if it exists
+            if (errorLabel) {
+                errorLabel.textContent = errorMessage;
+                errorLabel.style.color = 'red';
+            } else {
+                // Create a new error message element
+                errorLabel = document.createElement('div');
+                errorLabel.id = 'account-error';
+                errorLabel.style.color = 'hsl(0, 100%, 70%)';
+                errorLabel.textContent = errorMessage;
+                cardNumberInput.parentElement.appendChild(errorLabel);
+            }
+        }
+
+
     });
 
     cardholderNameInput.addEventListener('input', (e) => {
