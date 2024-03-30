@@ -1,26 +1,73 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
-body {
-    font-family: 'Space Grotesk', sans-serif;
-}
-
-.logo img {
-    margin-top: 40px;
-    margin-left: 30px;
-}
-
-.hide {
-    display: none;
-}
-
-.content h1 {
-    width: 200px;
-    margin-left: 40px;
-}
-
-.content p {
-    margin-left: 40px;
-}
-
-.icon img {
-    margin-left: 80px;
-}
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+    body {
+        font-family: 'Space Grotesk', sans-serif;
+    }
+    
+    .left {
+        background-image: url("./images/bg-main.png");
+    }
+    
+    .logo img {
+        margin-top: 40px;
+        margin-left: 30px;
+    }
+    
+    .hide {
+        display: none;
+    }
+    
+    .content h1 {
+        width: 200px;
+        margin-left: 40px;
+    }
+    
+    .content p {
+        margin-left: 40px;
+    }
+    
+    .icon img {
+        margin-left: 80px;
+    }
+    /* mobile design */
+    
+    @media (max-width: 768px) {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            height: 800px;
+            display: flex;
+            flex-direction: column;
+        }
+        .left {
+            background-image: url("./images/bg-main-mobile.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 400px;
+            background-color: red;
+        }
+        .front {
+            order: 2;
+            background-image: url("./images/bg-card-front.png");
+        }
+        .back {
+            order: 1;
+            background-image: url("./images/bg-card-back.png");
+        }
+        .logo img {
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        .content h1 {
+            width: 100px;
+            margin-left: 20px;
+        }
+        .content p {
+            margin-left: 20px;
+        }
+        .icon img {
+            margin-left: 40px;
+        }
+    }
