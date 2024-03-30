@@ -122,9 +122,53 @@ document.addEventListener('DOMContentLoaded', function() {
                 errorLabel.id = 'account-error';
                 errorLabel.style.color = 'hsl(0, 100%, 70%)';
                 errorLabel.textContent = errorMessage;
-                cardNumberInput.parentNode.insertBefore(errorLabel, cardNumberInput.nextSibling);
+
             }
         }
+
+        // New expiration date validation logic
+        mmInput.addEventListener('input', validateExpirationDate);
+        yyInput.addEventListener('input', validateExpirationDate);
+
+        function validateExpirationDate() {
+            const mmValue = mmInput.value;
+            const yyValue = yyInput.value;
+            const expirationError = document.getElementById('expiration-error');
+
+            // Check if both MM and YY are provided
+            if (mmValue && yyValue) {
+
+                if (/^(0?[1-9]|1[0-2])$/.test(mmValue)) {
+
+                    if (expirationError) {
+                        expirationError.textContent = '';
+                    }
+                } else {
+                    // Handle invalid MM input
+                    displayExpirationErrorMessage("Invalid month");
+                    return;
+                }
+            } else {
+
+                displayExpirationErrorMessage("Can't be blank");
+                return;
+            }
+        }
+
+        function displayExpirationErrorMessage(errorMessage) {
+            const expirationError = document.getElementById('expiration-error');
+
+            if (expirationError) {
+                expirationError.textContent = errorMessage;
+            } else {
+                const expirationError = document.createElement('div');
+                expirationError.id = 'expiration-error';
+                expirationError.style.color = 'red';
+                expirationError.textContent = errorMessage;
+                cardNumberInput.parentNode.insertBefore(errorLabel, expiration.nextSibling);
+            }
+        }
+
 
 
     });
