@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 errorLabel.id = 'account-error';
                 errorLabel.style.color = 'hsl(0, 100%, 70%)';
                 errorLabel.textContent = errorMessage;
-                cardNumberInput.parentElement.appendChild(errorLabel);
+                cardNumberInput.parentNode.insertBefore(errorLabel, cardNumberInput.nextSibling);
             }
         }
 
